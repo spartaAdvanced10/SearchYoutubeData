@@ -1,8 +1,17 @@
-package com.example.sparta_team_searchyoutubedata.network.data.model
+package com.example.sparta_team_searchyoutubedata.network.data.model.mapper
 
-import com.google.gson.annotations.SerializedName
-import java.util.Date
-import kotlin.math.sin
+import com.example.sparta_team_searchyoutubedata.network.data.model.reponse.PageInfoResponse
+import com.example.sparta_team_searchyoutubedata.network.data.model.reponse.SearchResourceIdResponse
+import com.example.sparta_team_searchyoutubedata.network.data.model.reponse.SearchResourceResponse
+import com.example.sparta_team_searchyoutubedata.network.data.model.reponse.SearchResourceSnippetResponse
+import com.example.sparta_team_searchyoutubedata.network.data.model.reponse.SearchYoutubeDataResponse
+import com.example.sparta_team_searchyoutubedata.network.data.model.reponse.ThumbnailKeyResponse
+import com.example.sparta_team_searchyoutubedata.network.data.model.entity.PageInfoEntity
+import com.example.sparta_team_searchyoutubedata.network.data.model.entity.SearchResourceEntity
+import com.example.sparta_team_searchyoutubedata.network.data.model.entity.SearchResourceIdEntity
+import com.example.sparta_team_searchyoutubedata.network.data.model.entity.SearchResourceSnippetEntity
+import com.example.sparta_team_searchyoutubedata.network.data.model.entity.SearchYoutubeDataEntity
+import com.example.sparta_team_searchyoutubedata.network.data.model.entity.ThumbnailKeyEntity
 
 fun SearchYoutubeDataResponse.toEntity() = SearchYoutubeDataEntity(
      kind = kind,

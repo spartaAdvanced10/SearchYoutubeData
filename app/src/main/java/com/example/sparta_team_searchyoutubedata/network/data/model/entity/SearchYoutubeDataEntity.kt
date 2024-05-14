@@ -1,6 +1,5 @@
-package com.example.sparta_team_searchyoutubedata.network.data.model
+package com.example.sparta_team_searchyoutubedata.network.data.model.entity
 
-import com.google.gson.annotations.SerializedName
 import java.util.Date
 
 data class SearchYoutubeDataEntity(
