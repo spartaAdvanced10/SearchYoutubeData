@@ -33,7 +33,7 @@ data class ChannelResourceSnippetResponse(
     @SerializedName("description") val description: String?,
     @SerializedName("customUrl") val customUrl: String?,
     @SerializedName("publishedAt") val publishedAt: Date?,
-    @SerializedName("thumbnails") val thumbnails: ThumbnailKeyResponse?,
+    @SerializedName("thumbnails") val thumbnails: ThumbnailsResponse?,
     @SerializedName("defaultLanguage") val defaultLanguage: String?,
     @SerializedName("localized") val localized: LocalizedResponse?,
     @SerializedName("country") val country: String?
@@ -57,11 +57,11 @@ data class RelatedPlayListResponse(
 )
 
 data class ChannelResourceStatisticsResponse(
-    @SerializedName("viewCount") val viewCount: ULong?,
+    @SerializedName("viewCount") val viewCount: Long?,
 //    @SerializedName("commentCount"), //지원 중단
-    @SerializedName("subscriberCount") val subscriberCount: ULong?,
+    @SerializedName("subscriberCount") val subscriberCount: Long?,
     @SerializedName("hiddenSubscriberCount") val hiddenSubscriberCount: Boolean?,
-    @SerializedName("videoCount") val videoCount: ULong?
+    @SerializedName("videoCount") val videoCount: Long?
 
 )
 
