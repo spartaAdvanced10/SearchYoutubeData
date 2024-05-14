@@ -38,14 +38,19 @@ data class SearchResourceSnippetEntity(
     val channelId: String?,
     val title: String?,
     val description: String?,
-    val thumbnails: ThumbnailKeyEntity?,
+    val thumbnails: ThumbnailsEntity?,
     val channelTitle: String?,
     val liveBroadcastContent: String?
 )
 
+data class ThumbnailsEntity(
+    val default: ThumbnailKeyEntity,
+    val medium: ThumbnailKeyEntity,
+    val high: ThumbnailKeyEntity
+)
 data class ThumbnailKeyEntity(
     val url: String?,
-    val width: UInt?,
-    val height: UInt?
+    val width: Int?,
+    val height: Int?
 )
 

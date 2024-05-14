@@ -35,7 +35,7 @@ data class VideoResourceSnippetEntity(
     val channelId: String?,
     val title: String?,
     val description: String?,
-    val thumbnails: ThumbnailKeyEntity?,
+    val thumbnails: ThumbnailsEntity?,
     val channelTitle: String?,
     val tags: List<String>?,
     val categoryId: String?,
@@ -79,9 +79,9 @@ data class VideoResourceStatusEntity(
 )
 
 data class VideoResourceStatisticsEntity(
-    val viewCount: ULong?,
-    val likeCount: ULong?,
-    val commentCount: ULong?
+    val viewCount: Long?,
+    val likeCount: Long?,
+    val commentCount: Long?
 )
 
 
@@ -101,31 +101,31 @@ data class VideoResourceRecordingDetailsEntity(
 
 data class VideoResourceFileDetailsEntity(
     val fileName: String?,
-    val fileSize: ULong?,
+    val fileSize: Long?,
     val fileType: String?,
     val container: String?,
     val videoStreams: List<VideoStreamEntity>?,
     val audioStreams: List<AudioStreamEntity>?,
-    val durationMs: ULong?,
-    val bitrateBps: ULong?,
+    val durationMs: Long?,
+    val bitrateBps: Long?,
     val creationTime: String?
 )
 
 data class VideoStreamEntity(
-    val widthPixels: UInt?,
-    val heightPixels: UInt?,
+    val widthPixels: Int?,
+    val heightPixels: Int?,
     val frameRateFps: Double?,
     val aspectRatio: Double?,
     val codec: String?,
-    val bitrateBps: ULong?,
+    val bitrateBps: Long?,
     val rotation: String?,
     val vendor: String?
 )
 
 data class AudioStreamEntity(
-    val channelCount: UInt?,
+    val channelCount: Int?,
     val codec: String?,
-    val bitrateBps: ULong?,
+    val bitrateBps: Long?,
     val vendor: String?
 )
 
@@ -141,9 +141,9 @@ data class VideoResourceProcessingDetailsEntity(
 )
 
 data class ProcessingProgressEntity(
-    val partsTotal: ULong?,
-    val partsProcessed: ULong?,
-    val timeLeftMs: ULong?
+    val partsTotal: Long?,
+    val partsProcessed: Long?,
+    val timeLeftMs: Long?
 )
 
 data class VideoResourceSuggestionsEntity(
@@ -164,7 +164,7 @@ data class VideoResourceLiveStreamingDetailsEntity(
     val actualEndTime: Date?,
     val scheduledStartTime: Date?,
     val scheduledEndTime: Date?,
-    val concurrentViewers: ULong?,
+    val concurrentViewers: Long?,
     val activeLiveChatId: String?
 )
 

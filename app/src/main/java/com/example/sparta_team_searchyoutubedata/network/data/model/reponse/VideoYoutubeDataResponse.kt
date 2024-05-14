@@ -35,7 +35,7 @@ data class VideoResourceSnippetResponse(
     @SerializedName("channelId") val channelId: String?,
     @SerializedName("title") val title: String?,
     @SerializedName("description") val description: String?,
-    @SerializedName("thumbnails") val thumbnails: ThumbnailKeyResponse?,
+    @SerializedName("thumbnails") val thumbnails: ThumbnailsResponse?,
     @SerializedName("channelTitle") val channelTitle: String?,
     @SerializedName("tags") val tags: List<String>?,
     @SerializedName("categoryId") val categoryId: String?,
@@ -79,9 +79,9 @@ data class VideoResourceStatusResponse(
 )
 
 data class VideoResourceStatisticsResponse(
-    @SerializedName("viewCount") val viewCount: ULong?,
-    @SerializedName("likeCount") val likeCount: ULong?,
-    @SerializedName("commentCount") val commentCount: ULong?
+    @SerializedName("viewCount") val viewCount: Long?,
+    @SerializedName("likeCount") val likeCount: Long?,
+    @SerializedName("commentCount") val commentCount: Long?
 )
 
 
@@ -101,31 +101,31 @@ data class VideoResourceRecordingDetailsResponse(
 
 data class VideoResourceFileDetailsResponse(
     @SerializedName("fileName") val fileName: String?,
-    @SerializedName("fileSize") val fileSize: ULong?,
+    @SerializedName("fileSize") val fileSize: Long?,
     @SerializedName("fileType") val fileType: String?,
     @SerializedName("container") val container: String?,
     @SerializedName("videoStreams") val videoStreams: List<VideoStream>?,
     @SerializedName("audioStreams") val audioStreams: List<AudioStream>?,
-    @SerializedName("durationMs") val durationMs: ULong?,
-    @SerializedName("bitrateBps") val bitrateBps: ULong?,
+    @SerializedName("durationMs") val durationMs: Long?,
+    @SerializedName("bitrateBps") val bitrateBps: Long?,
     @SerializedName("creationTime") val creationTime: String?
 )
 
 data class VideoStream(
-    @SerializedName("widthPixels") val widthPixels: UInt?,
-    @SerializedName("heightPixels") val heightPixels: UInt?,
+    @SerializedName("widthPixels") val widthPixels: Int?,
+    @SerializedName("heightPixels") val heightPixels: Int?,
     @SerializedName("frameRateFps") val frameRateFps: Double?,
     @SerializedName("aspectRatio") val aspectRatio: Double?,
     @SerializedName("codec") val codec: String?,
-    @SerializedName("bitrateBps") val bitrateBps: ULong?,
+    @SerializedName("bitrateBps") val bitrateBps: Long?,
     @SerializedName("rotation") val rotation: String?,
     @SerializedName("vendor") val vendor: String?
 )
 
 data class AudioStream(
-    @SerializedName("channelCount") val channelCount: UInt?,
+    @SerializedName("channelCount") val channelCount: Int?,
     @SerializedName("codec") val codec: String?,
-    @SerializedName("bitrateBps") val bitrateBps: ULong?,
+    @SerializedName("bitrateBps") val bitrateBps: Long?,
     @SerializedName("vendor") val vendor: String?
 )
 
@@ -141,9 +141,9 @@ data class VideoResourceProcessingDetailsResponse(
 )
 
 data class ProcessingProgress(
-    @SerializedName("partsTotal") val partsTotal: ULong?,
-    @SerializedName("partsProcessed") val partsProcessed: ULong?,
-    @SerializedName("timeLeftMs") val timeLeftMs: ULong?
+    @SerializedName("partsTotal") val partsTotal: Long?,
+    @SerializedName("partsProcessed") val partsProcessed: Long?,
+    @SerializedName("timeLeftMs") val timeLeftMs: Long?
 )
 
 data class VideoResourceSuggestionsResponse(
@@ -164,7 +164,7 @@ data class VideoResourceLiveStreamingDetailsResponse(
     @SerializedName("actualEndTime") val actualEndTime: Date?,
     @SerializedName("scheduledStartTime") val scheduledStartTime: Date?,
     @SerializedName("scheduledEndTime") val scheduledEndTime: Date?,
-    @SerializedName("concurrentViewers") val concurrentViewers: ULong?,
+    @SerializedName("concurrentViewers") val concurrentViewers: Long?,
     @SerializedName("activeLiveChatId") val activeLiveChatId: String?
 )
 

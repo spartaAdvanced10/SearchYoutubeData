@@ -32,7 +32,7 @@ data class ChannelResourceSnippetEntity(
     val description: String?,
     val customUrl: String?,
     val publishedAt: Date?,
-    val thumbnails: ThumbnailKeyEntity?,
+    val thumbnails: ThumbnailsEntity?,
     val defaultLanguage: String?,
     val localized: LocalizedEntity?,
     val country: String?
@@ -56,11 +56,11 @@ data class RelatedPlayListEntity(
 )
 
 data class ChannelResourceStatisticsEntity(
-    val viewCount: ULong?,
+    val viewCount: Long?,
 //    @SerializedName("commentCount"), //지원 중단
-    val subscriberCount: ULong?,
+    val subscriberCount: Long?,
     val hiddenSubscriberCount: Boolean?,
-    val videoCount: ULong?
+    val videoCount: Long?
 
 )
 

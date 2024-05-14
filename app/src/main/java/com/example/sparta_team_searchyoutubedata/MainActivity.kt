@@ -2,16 +2,14 @@ package com.example.sparta_team_searchyoutubedata
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import coil.load
 import com.example.sparta_team_searchyoutubedata.databinding.ActivityMainBinding
 import com.example.sparta_team_searchyoutubedata.network.client.RetrofitClient
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepository
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepositoryImpl
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     private val youtubeDataRepository: YoutubeDataRepository by lazy {
@@ -26,23 +24,32 @@ class MainActivity : AppCompatActivity() {
 
 
         lifecycleScope.launch {
-//            val resultSearch = youtubeDataRepository.getSearch(
-//                order = "relevance",
-//                q = "android"
-//            ).items?.map{
-//                it.id?.channelId
-//            }
-//
+            val resultSearch: List<String>? = youtubeDataRepository.getSearch(
+                order = "relevance",
+                q = "android"
+            ).items?.map {
+                it.snippet?.thumbnails?.medium?.url ?: ""
+            }
+
 //            val resultChannel = youtubeDataRepository.getChannel(
 //                id = "UCVHFbqXqoYvEWM1Dxl0QDg"
 //            ).items
 //
 //            val resultVideoCategory = youtubeDataRepository.getVideoCategory().items
+//
+//            val resultVideo = youtubeDataRepository.getVideos(videoCategoryId = "0", chart = "mostPopular").items
 
-            val resultVideo = youtubeDataRepository.getVideos(videoCategoryId = "0", chart = "mostPopular").items
-
-            binding.tvTest.text = resultVideo.toString()
-
+            if (!resultSearch.isNullOrEmpty()) {
+                Log.d("test", resultSearch.toString())
+                binding.ivTest.load(resultSearch[0])
+            }
         }
     }
+
+
 }
+
+
+
+
+

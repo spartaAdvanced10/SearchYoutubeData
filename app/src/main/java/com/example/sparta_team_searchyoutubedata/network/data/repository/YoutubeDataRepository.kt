@@ -36,6 +36,5 @@ interface YoutubeDataRepository {
         maxResults:UInt = 5U,
         videoCategoryId: String
     ): VideoYoutubeDataEntity
-
 }
 
