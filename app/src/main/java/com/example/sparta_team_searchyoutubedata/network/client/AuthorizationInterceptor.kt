@@ -7,7 +7,7 @@ class AuthorizationInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val apiKey = "AIzaSyDCkxHJXX6PBVxaHBjrKe3EUuPWK3EP4uY"
         val originalRequest = chain.request()
-        val modifiedUrl = originalRequest.url().newBuilder()
+        val modifiedUrl = originalRequest.url.newBuilder()
             .addQueryParameter("key", apiKey)
             .build()
 
