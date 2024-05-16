@@ -7,17 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/iv_test"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="40sp"
-        android:src="@drawable/ic_search_on"/>
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_logo_main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/tb_main"
+        app:layout_constraintBottom_toBottomOf="@id/tb_main"
+        app:layout_constraintStart_toStartOf="@id/tb_main"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_margin="5dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <FrameLayout
+        android:id="@+id/fl_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tb_main"
+        app:layout_constraintBottom_toTopOf="@id/botNavi_main"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/botNavi_main"
@@ -25,6 +37,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_main_bottomnavigation"
-        android:background="#514644"/>
+        android:background="@color/emperor"
+        app:itemTextColor="@drawable/selector_botnavi_textcolor"
+        style="@style/BottomNavigationViewNoRipple"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
