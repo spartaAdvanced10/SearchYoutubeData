@@ -1,4 +1,4 @@
-package com.example.sparta_team_searchyoutubedata.network.data.model
+package com.example.sparta_team_searchyoutubedata.network.data.model.reponse
 
 import com.google.gson.annotations.SerializedName
 import java.util.Date
@@ -39,15 +39,20 @@ data class SearchResourceSnippetResponse(
     @SerializedName("channelId") val channelId: String?,
     @SerializedName("title") val title: String?,
     @SerializedName("description") val description: String?,
-    @SerializedName("thumbnails") val thumbnails: ThumbnailKeyResponse?,
+    @SerializedName("thumbnails") val thumbnails: ThumbnailsResponse?,
     @SerializedName("channelTitle") val channelTitle: String?,
     @SerializedName("liveBroadcastContent") val liveBroadcastContent: String?
 )
 
+data class ThumbnailsResponse(
+    @SerializedName("default") val default: ThumbnailKeyResponse,
+    @SerializedName("medium") val medium: ThumbnailKeyResponse,
+    @SerializedName("high") val high: ThumbnailKeyResponse
+)
 data class ThumbnailKeyResponse(
     @SerializedName("url") val url: String?,
-    @SerializedName("width") val width: UInt?,
-    @SerializedName("height") val height: UInt?
+    @SerializedName("width") val width: Int?,
+    @SerializedName("height") val height: Int?
 )
 
 
