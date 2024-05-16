@@ -2,7 +2,9 @@ package com.example.sparta_team_searchyoutubedata
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.sparta_team_searchyoutubedata.databinding.ActivityMainBinding
@@ -18,38 +20,87 @@ class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        initView()
+    }
 
-        lifecycleScope.launch {
-            val resultSearch: List<String>? = youtubeDataRepository.getSearch(
-                order = "relevance",
-                q = "android"
-            ).items?.map {
-                it.snippet?.thumbnails?.medium?.url ?: ""
-            }
 
-//            val resultChannel = youtubeDataRepository.getChannel(
-//                id = "UCVHFbqXqoYvEWM1Dxl0QDg"
-//            ).items
-//
-//            val resultVideoCategory = youtubeDataRepository.getVideoCategory().items
-//
-//            val resultVideo = youtubeDataRepository.getVideos(videoCategoryId = "0", chart = "mostPopular").items
+    private fun initView() = with(binding) {
+        setSupportActionBar(binding.tbMain)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
-            if (!resultSearch.isNullOrEmpty()) {
-                Log.d("test", resultSearch.toString())
-                binding.ivTest.load(resultSearch[0])
+        botNaviMain.itemIconTintList = null
+        botNaviMain.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.botNavi_menu_home -> {
+                    ivLogoMain.setImageResource(R.drawable.ic_home_on)
+                    true
+                }
+
+                R.id.botNavi_menu_mine -> {
+                    true
+                }
+
+                R.id.botNavi_menu_search -> {
+                    true
+                }
+
+                else -> false
             }
         }
     }
 
+    private fun setBotNaviIcon(onIcon: String) = with(binding) {
+        botNaviMain.menu.findItem(R.id.botNavi_menu_home).setIcon(R.drawable.ic_home_off)
+        botNaviMain.menu.findItem(R.id.botNavi_menu_mine).setIcon(R.drawable.ic_mine_off)
+        botNaviMain.menu.findItem(R.id.botNavi_menu_search).setIcon(R.drawable.ic_search_off)
+
+        when (onIcon) {
+            "home" -> botNaviMain.menu.findItem(R.id.botNavi_menu_home)
+                .setIcon(R.drawable.ic_home_on)
+
+            "mine" -> botNaviMain.menu.findItem(R.id.botNavi_menu_mine)
+                .setIcon(R.drawable.ic_mine_on)
+
+            "search" -> botNaviMain.menu.findItem(R.id.botNavi_menu_search)
+                .setIcon(R.drawable.ic_search_on)
+            else -> {}
+        }
+    }
+
+    private fun setFragment(fragment: Fragment) {
+        this@MainActivity.supportFragmentManager.beginTransaction()
+            .replace(binding.flMain.id, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
 
 }
 
 
-
+//lifecycleScope.launch {
+//    val resultSearch: List<String>? = youtubeDataRepository.getSearch(
+//        order = "relevance",
+//        q = "android"
+//    ).items?.map {
+//        it.snippet?.thumbnails?.medium?.url ?: ""
+//    }
+//
+////            val resultChannel = youtubeDataRepository.getChannel(
+////                id = "UCVHFbqXqoYvEWM1Dxl0QDg"
+////            ).items
+////
+////            val resultVideoCategory = youtubeDataRepository.getVideoCategory().items
+////
+////            val resultVideo = youtubeDataRepository.getVideos(videoCategoryId = "0", chart = "mostPopular").items
+//
+//    if (!resultSearch.isNullOrEmpty()) {
+//        Log.d("test", resultSearch.toString())
+//    }
+//}
 
 

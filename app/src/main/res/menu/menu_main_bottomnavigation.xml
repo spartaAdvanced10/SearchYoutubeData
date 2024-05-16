@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:icon="@drawable/ic_search_on"
-        android:title="TODO"
-        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/botNavi_menu_search"
+        android:icon="@drawable/selector_botnavi_search"
+        android:title="Search"
+        android:background="@android:color/transparent"/>
+    <item
+        android:id="@+id/botNavi_menu_home"
+        android:title="Home"
+        android:icon="@drawable/selector_botnavi_home"
+        android:background="@android:color/transparent"/>
+    <item
+        android:id="@+id/botNavi_menu_mine"
+        android:title="Mine"
+        android:icon="@drawable/selector_botnavi_mine"
+        android:background="@android:color/transparent"/>
 </menu>
