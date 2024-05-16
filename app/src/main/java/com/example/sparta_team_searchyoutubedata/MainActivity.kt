@@ -11,6 +11,7 @@ import com.example.sparta_team_searchyoutubedata.databinding.ActivityMainBinding
 import com.example.sparta_team_searchyoutubedata.network.client.RetrofitClient
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepository
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepositoryImpl
+import com.example.sparta_team_searchyoutubedata.search.SearchFragment
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -37,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         botNaviMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.botNavi_menu_home -> {
-                    ivLogoMain.setImageResource(R.drawable.ic_home_on)
                     true
                 }
 
@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.botNavi_menu_search -> {
+                    setFragment(SearchFragment())
                     true
                 }
 

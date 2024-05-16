@@ -13,7 +13,7 @@ class YoutubeDataRepositoryImpl(
     override suspend fun getSearch(
         part: String,
         channelType: String,
-        maxResults: UInt,
+        maxResults: Int,
         order: String,
         q: String,
         relevanceLanguage: String
@@ -28,7 +28,7 @@ class YoutubeDataRepositoryImpl(
 
     override suspend fun getChannel(
         part: String,
-        maxResults: UInt,
+        maxResults: Int,
         id: String
     ): ChannelYoutubeDataEntity = remoteResource.getYoutubeChannelData(
         part,
@@ -47,7 +47,7 @@ class YoutubeDataRepositoryImpl(
     override suspend fun getVideos(
         part: String,
         chart:String,
-        maxResults: UInt,
+        maxResults: Int,
         videoCategoryId: String
     ): VideoYoutubeDataEntity =remoteResource.getYoutubeVideosData(
         part = part,

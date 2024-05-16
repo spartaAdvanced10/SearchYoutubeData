@@ -16,7 +16,7 @@ interface YoutubeDataRemoteResource {
     suspend fun getYoutubeSearchData(
         @Query("part") part: String,
         @Query("channelType") channelType: String ,
-        @Query("maxResults") maxResults: UInt,
+        @Query("maxResults") maxResults: Int,
         @Query("order") order: String, //date, rating, relevance, title, viewCount, videoCount
         @Query("q") q :String,
         @Query("relevanceLanguage") relevanceLanguage:String,
@@ -25,7 +25,7 @@ interface YoutubeDataRemoteResource {
     @GET("channels")
     suspend fun getYoutubeChannelData(
         @Query("part") part: String,
-        @Query("maxResults") maxResults: UInt,
+        @Query("maxResults") maxResults: Int,
         @Query("id") id: String
     ): ChannelYoutubeDataResponse
 
@@ -39,7 +39,7 @@ interface YoutubeDataRemoteResource {
     suspend fun getYoutubeVideosData(
         @Query("part") part: String,
         @Query("chart") chart: String,
-        @Query("maxResults") maxResults: UInt,
+        @Query("maxResults") maxResults: Int,
         @Query("videoCategoryId") videoCategoryId: String
     ): VideoYoutubeDataResponse
 }

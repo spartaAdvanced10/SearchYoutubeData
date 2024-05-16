@@ -13,7 +13,7 @@ interface YoutubeDataRepository {
     suspend fun getSearch(
         part: String = "snippet",
         channelType: String = "any",
-        maxResults: UInt = 5u,
+        maxResults: Int = 5,
         order: String, //date, rating, relevance, title, viewCount, videoCount
         q :String,
         relevanceLanguage:String = "ko",
@@ -21,7 +21,7 @@ interface YoutubeDataRepository {
 
     suspend fun getChannel(
         part: String = "snippet",
-        maxResults: UInt = 5U,
+        maxResults: Int = 5,
         id: String
     ) : ChannelYoutubeDataEntity
 
@@ -33,7 +33,7 @@ interface YoutubeDataRepository {
     suspend fun getVideos(
         part: String = "snippet",
         chart:String = "mostPopular",
-        maxResults:UInt = 5U,
+        maxResults:Int = 5,
         videoCategoryId: String
     ): VideoYoutubeDataEntity
 }
