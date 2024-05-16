@@ -1,5 +1,7 @@
 package com.example.sparta_team_searchyoutubedata.videoDetail
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -30,6 +32,14 @@ class VideoDetailActivity : AppCompatActivity() {
         
         initView()
         initViewModel()
+
+    }
+
+    override fun onBackPressed() {
+        val resultIntent = Intent()
+        resultIntent.putExtra("isLiked", viewModel.uiState.value.isLiked)
+        setResult(Activity.RESULT_OK, resultIntent)
+        super.onBackPressed()
     }
 
     private fun initView() = with(binding){
@@ -44,7 +54,9 @@ class VideoDetailActivity : AppCompatActivity() {
             else ivIcGood.setImageResource(R.drawable.ic_like_off)
         }
 
-        ivIcGood.setOnClickListener { viewModel.onLiked() }
+        ivIcGood.setOnClickListener {
+            viewModel.onLiked()
+        }
     }
 
     private fun initViewModel() = with(viewModel){
