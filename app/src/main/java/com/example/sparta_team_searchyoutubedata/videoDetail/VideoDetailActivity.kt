@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import com.example.sparta_team_searchyoutubedata.R
 import com.example.sparta_team_searchyoutubedata.databinding.ActivityVideoDetailBinding
+import com.example.sparta_team_searchyoutubedata.homeFragment.HomeItemModel
 
 class VideoDetailActivity : AppCompatActivity() {
     private val binding: ActivityVideoDetailBinding by lazy {
@@ -30,6 +31,15 @@ class VideoDetailActivity : AppCompatActivity() {
             ivThumbnail.load(it.thumbnail)
             tvTitle.text = it.title
             tvDetail.text = it.description
+        }
+        //intent 받는 부분
+        val intent = intent
+        val item = intent.getSerializableExtra("item") as HomeItemModel?
+
+        if (item != null) {
+            binding.tvTitle.text = item.title
+            binding.ivThumbnail.load(item.thumbnails)
+            binding.tvDetail.text = item.description
         }
 
         ivIcGood.setOnClickListener {  }
