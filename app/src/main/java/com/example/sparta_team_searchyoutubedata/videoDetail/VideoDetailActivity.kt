@@ -36,10 +36,6 @@ class VideoDetailActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val resultIntent = Intent()
-        resultIntent.putExtra("detailData", viewModel.uiState.value)
-        setResult(Activity.RESULT_OK, resultIntent)
-        finish()
     }
 
     private fun initView() = with(binding){
