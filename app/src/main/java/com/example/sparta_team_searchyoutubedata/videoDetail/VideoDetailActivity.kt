@@ -20,7 +20,7 @@ class VideoDetailActivity : AppCompatActivity() {
         ActivityVideoDetailBinding.inflate(layoutInflater)
     }
     private val videoDetailItem: VideoDetailItem by lazy {
-        VideoDetailItem("", "title", "description", false)
+        intent.getParcelableExtra<VideoDetailItem>("selectItem") ?: VideoDetailItem("", "title", "description", false)
     }
 
     private val viewModel: VideoDetailViewModel by viewModels{
@@ -36,10 +36,11 @@ class VideoDetailActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val resultIntent = Intent()
-        resultIntent.putExtra("isLiked", viewModel.uiState.value.isLiked)
-        setResult(Activity.RESULT_OK, resultIntent)
         super.onBackPressed()
+        val resultIntent = Intent()
+        resultIntent.putExtra("detailData", viewModel.uiState.value)
+        setResult(Activity.RESULT_OK, resultIntent)
+        finish()
     }
 
     private fun initView() = with(binding){
@@ -81,6 +82,14 @@ class VideoDetailActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId){
             R.id.toolbar_videoDetail_upload -> {
+                val sendIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, viewModel.uiState.value.thumbnail)
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, "Share to other application")
+                startActivity(shareIntent)
                 return true
             }
             else -> return false

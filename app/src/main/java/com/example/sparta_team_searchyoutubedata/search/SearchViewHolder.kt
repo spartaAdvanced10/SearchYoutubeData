@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
@@ -19,17 +20,25 @@ class SearchViewModel(
     val uiState: StateFlow<SearchUiState> = _uiState.asStateFlow()
 
     fun onSearch(searchKey: String) = viewModelScope.launch {
-        val thumbnailList = repository.getSearch(q = searchKey, order = "relevance", maxResults = 5).items?.map {
+        _uiState.update { prev->
+            prev.copy(isLoading = true)
+        }
+        val searchResult = repository.getSearch(q = searchKey, order = "relevance", maxResults = 5)
+        val thumbnailList = searchResult.items?.map {
             SearchItem(
                 thumbnail = it.snippet?.thumbnails?.default?.url ?: "",
-                title = it.snippet?.title ?: ""
+                title = it.snippet?.title ?: "",
+                description = it.snippet?.description ?: "",
+                nextPageToken = searchResult.nextPageToken ?: "",
+                prevPageToken = searchResult.prevPageToken ?: ""
             )
         }
 
         thumbnailList?.let { list ->
             _uiState.update { prev ->
                 prev.copy(
-                    list = list
+                    list = list,
+                    isLoading = false
                 )
             }
         }

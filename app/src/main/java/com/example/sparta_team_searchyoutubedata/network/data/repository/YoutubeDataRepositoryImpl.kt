@@ -16,14 +16,16 @@ class YoutubeDataRepositoryImpl(
         maxResults: Int,
         order: String,
         q: String,
-        relevanceLanguage: String
+        relevanceLanguage: String,
+        pageToken: String
     ): SearchYoutubeDataEntity = remoteResource.getYoutubeSearchData(
         part,
         channelType,
         maxResults,
         order,
         q,
-        relevanceLanguage
+        relevanceLanguage,
+        pageToken
     ).toEntity()
 
     override suspend fun getChannel(

@@ -20,6 +20,7 @@ interface YoutubeDataRemoteResource {
         @Query("order") order: String, //date, rating, relevance, title, viewCount, videoCount
         @Query("q") q :String,
         @Query("relevanceLanguage") relevanceLanguage:String,
+        @Query("pageToken") pageToken: String
     ): SearchYoutubeDataResponse
 
     @GET("channels")
