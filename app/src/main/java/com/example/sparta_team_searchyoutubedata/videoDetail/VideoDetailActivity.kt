@@ -34,9 +34,7 @@ class VideoDetailActivity : AppCompatActivity() {
         initViewModel()
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
+
 
     private fun initView() = with(binding){
         setSupportActionBar(tbVideoDetail)
