@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.sparta_team_searchyoutubedata.databinding.ActivityMainBinding
+import com.example.sparta_team_searchyoutubedata.homeFragment.HomeFragment
 import com.example.sparta_team_searchyoutubedata.network.client.RetrofitClient
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepository
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepositoryImpl
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         botNaviMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.botNavi_menu_home -> {
-                    ivLogoMain.setImageResource(R.drawable.ic_home_on)
+                    setFragment(HomeFragment())
                     true
                 }
 
