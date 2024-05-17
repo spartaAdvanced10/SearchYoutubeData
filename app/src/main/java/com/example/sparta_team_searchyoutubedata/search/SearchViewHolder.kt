@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.sparta_team_searchyoutubedata.network.client.RetrofitClient
+import com.example.sparta_team_searchyoutubedata.network.data.model.entity.SearchYoutubeDataEntity
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepository
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepositoryImpl
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,29 +20,38 @@ class SearchViewModel(
     private val _uiState = MutableStateFlow(SearchUiState.init())
     val uiState: StateFlow<SearchUiState> = _uiState.asStateFlow()
 
-    fun onSearch(searchKey: String) = viewModelScope.launch {
+    fun onSearch(searchKey: String, pageToken: String?) = viewModelScope.launch {
         _uiState.update { prev->
             prev.copy(isLoading = true)
         }
-        val searchResult = repository.getSearch(q = searchKey, order = "relevance", maxResults = 5)
-        val thumbnailList = searchResult.items?.map {
-            SearchItem(
-                thumbnail = it.snippet?.thumbnails?.default?.url ?: "",
-                title = it.snippet?.title ?: "",
-                description = it.snippet?.description ?: "",
-                nextPageToken = searchResult.nextPageToken ?: "",
-                prevPageToken = searchResult.prevPageToken ?: ""
-            )
-        }
+        var pageToken:String = ""
+        if(pageToken == "prev") pageToken = uiState.value.prevPageToken else if (pageToken == "next") pageToken = uiState.value.nextPageToken
 
-        thumbnailList?.let { list ->
+        val searchResult = repository.getSearch(q = searchKey, order = "relevance", maxResults = 5, pageToken = pageToken)
+        val itemList = getListItem(searchResult)
+
+        itemList?.let { list ->
             _uiState.update { prev ->
                 prev.copy(
                     list = list,
-                    isLoading = false
+                    isLoading = false,
+                    nextPageToken = searchResult.nextPageToken ?: "",
+                    prevPageToken = searchResult.prevPageToken ?: ""
                 )
             }
         }
+    }
+
+    private fun getListItem(searchYoutubeDataEntity: SearchYoutubeDataEntity): List<SearchItem>{
+        val itemList = searchYoutubeDataEntity.items?.map {
+            SearchItem(
+                thumbnail = it.snippet?.thumbnails?.default?.url ?: "",
+                title = it.snippet?.title ?: "",
+                description = it.snippet?.description ?: ""
+            )
+        }
+
+        return itemList as List<SearchItem>
     }
 }
 

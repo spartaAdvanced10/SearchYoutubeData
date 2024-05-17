@@ -4,7 +4,5 @@ data class SearchItem (
     val thumbnail: String,
     val title: String,
     val description: String,
-    val isLiked: Boolean = false,
-    val nextPageToken:String = "",
-    val prevPageToken:String = ""
+    val isLiked: Boolean = false
 )
