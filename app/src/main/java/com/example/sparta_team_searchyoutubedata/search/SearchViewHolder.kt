@@ -62,3 +62,4 @@ class SearchViewModelFactory : ViewModelProvider.Factory {
         modelClass: Class<T>
     ): T = SearchViewModel(repository) as T
 }
+

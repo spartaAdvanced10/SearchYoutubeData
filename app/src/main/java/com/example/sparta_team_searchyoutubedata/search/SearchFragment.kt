@@ -24,24 +24,13 @@ class SearchFragment : Fragment() {
     private val binding: FragmentSearchBinding get() = _binding!!
 
     private val listAdapter: SearchListAdapter by lazy {
-        SearchListAdapter(startForActivity)
+        SearchListAdapter()
     }
 
     private val viewModel: SearchViewModel by viewModels{
         SearchViewModelFactory()
     }
 
-    private val startForActivity by lazy {
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data = result.data?.getParcelableExtra<VideoDetailItem>("detailData")
-                data?.let {
-                    receivedData = SearchItem(data.thumbnail, data.title, data.description, data.isLiked)
-                }
-                Log.d("result.data", data.toString())
-            }
-        }
-    }
 
     private var receivedData: SearchItem? = null
 
@@ -89,7 +78,6 @@ class SearchFragment : Fragment() {
                 }
             }
         })
-
     }
 
     private fun initViewModel(){

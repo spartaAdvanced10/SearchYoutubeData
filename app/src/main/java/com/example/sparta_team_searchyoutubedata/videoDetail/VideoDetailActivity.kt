@@ -20,7 +20,7 @@ class VideoDetailActivity : AppCompatActivity() {
         ActivityVideoDetailBinding.inflate(layoutInflater)
     }
     private val videoDetailItem: VideoDetailItem by lazy {
-        intent.getParcelableExtra<VideoDetailItem>("selectItem") ?: VideoDetailItem("", "title", "description", false)
+        intent.getSerializableExtra("selectItem") as  VideoDetailItem ?: VideoDetailItem("", "title", "description", false)
     }
 
     private val viewModel: VideoDetailViewModel by viewModels{
@@ -32,7 +32,6 @@ class VideoDetailActivity : AppCompatActivity() {
         
         initView()
         initViewModel()
-
     }
 
     override fun onBackPressed() {

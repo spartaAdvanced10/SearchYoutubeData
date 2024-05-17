@@ -1,24 +1,20 @@
 package com.example.sparta_team_searchyoutubedata.search
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import coil.load
 import com.example.sparta_team_searchyoutubedata.databinding.ItemSearchBinding
 import com.example.sparta_team_searchyoutubedata.videoDetail.VideoDetailActivity
 import com.example.sparta_team_searchyoutubedata.videoDetail.VideoDetailItem
 
 class SearchListAdapter(
-    private val startForActivity: ActivityResultLauncher<Intent>
 )
     :ListAdapter<SearchItem, SearchListAdapter.ViewHolder>(
         object: DiffUtil.ItemCallback<SearchItem>() {
@@ -49,7 +45,7 @@ class SearchListAdapter(
                 val intent = Intent(context, VideoDetailActivity::class.java).apply {
                     putExtra("selectItem",VideoDetailItem(item.thumbnail, item.title, item.description, false))
                 }
-                startForActivity.launch(intent)
+                context.startActivity(intent)
             }
         }
     }
