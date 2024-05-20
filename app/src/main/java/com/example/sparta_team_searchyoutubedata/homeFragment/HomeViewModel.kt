@@ -72,6 +72,7 @@ class HomeViewModel(
             }
 
         }
+        channelList = channelList.toMutableSet().toMutableList()
         channelList?.let { list ->
             _uiState.update { prev ->
                 prev.copy(
