@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sparta_team_searchyoutubedata.R
 import com.example.sparta_team_searchyoutubedata.databinding.FragmentHomeBinding
+import com.example.sparta_team_searchyoutubedata.room.entity.WatchedListEntity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -20,16 +21,22 @@ import kotlinx.coroutines.launch
 class HomeFragment:Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val adapter:HomeAdapter by lazy {
-        HomeAdapter()
+        HomeAdapter{item ->
+            onItemClick(item)
+        }
     }
     private val cAdapter:HomeAdapter by lazy {
-        HomeAdapter()
+        HomeAdapter{item ->
+            onItemClick(item)
+        }
     }
     private val channelAdapter:HomeAdapter by lazy {
-        HomeAdapter()
+        HomeAdapter{item ->
+            onItemClick(item)
+        }
     }
     private val viewModel:HomeViewModel by viewModels{
-        HomeViewModelFactory()
+        HomeViewModelFactory(requireContext())
     }
 
     override fun onCreateView(
@@ -108,5 +115,16 @@ class HomeFragment:Fragment() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
+    }
+
+    private fun onItemClick(item: HomeItemModel) {
+        val watchedVideo = WatchedListEntity(
+            id = item.thumbnails,
+            title = item.title,
+            thumbnailUrl = item.thumbnails,
+            description = item.description,
+            isLiked = item.isLiked
+        )
+        viewModel.saveWatchedVideo(watchedVideo)
     }
 }

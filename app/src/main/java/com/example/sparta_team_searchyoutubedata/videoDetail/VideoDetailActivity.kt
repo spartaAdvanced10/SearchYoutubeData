@@ -12,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.sparta_team_searchyoutubedata.R
 import com.example.sparta_team_searchyoutubedata.databinding.ActivityVideoDetailBinding
+import com.example.sparta_team_searchyoutubedata.room.database.MyVideoListDatabase
+import com.example.sparta_team_searchyoutubedata.room.repository.MyVideoListRepository
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -22,9 +24,12 @@ class VideoDetailActivity : AppCompatActivity() {
     private val videoDetailItem: VideoDetailItem by lazy {
         intent.getSerializableExtra("selectItem") as  VideoDetailItem ?: VideoDetailItem("", "title", "description", false)
     }
-
+    // repository 초기화 작업.
+    private val repository: MyVideoListRepository by lazy{
+        MyVideoListRepository(MyVideoListDatabase.getMyVideoDatabase(this).myVideoListDao())
+    }
     private val viewModel: VideoDetailViewModel by viewModels{
-        VideoDetailViewModelFactory(videoDetailItem)
+        VideoDetailViewModelFactory(videoDetailItem, repository)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

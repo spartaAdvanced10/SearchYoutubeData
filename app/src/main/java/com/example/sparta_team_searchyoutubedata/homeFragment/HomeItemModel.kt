@@ -4,5 +4,6 @@ data class HomeItemModel(
     var title:String,
     var thumbnails:String,
     var description: String,
-    var channelID :String
+    var channelID :String,
+    var isLiked: Boolean
 )
