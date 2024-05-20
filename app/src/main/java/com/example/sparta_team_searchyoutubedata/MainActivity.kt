@@ -12,6 +12,7 @@ import com.example.sparta_team_searchyoutubedata.homeFragment.HomeFragment
 import com.example.sparta_team_searchyoutubedata.network.client.RetrofitClient
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepository
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepositoryImpl
+import com.example.sparta_team_searchyoutubedata.search.SearchFragment
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.tbMain)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        setFragment(HomeFragment())
         botNaviMain.itemIconTintList = null
         botNaviMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.botNavi_menu_search -> {
+                    setFragment(SearchFragment())
                     true
                 }
 

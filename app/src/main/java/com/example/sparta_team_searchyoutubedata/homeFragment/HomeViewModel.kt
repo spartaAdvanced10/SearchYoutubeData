@@ -20,7 +20,7 @@ class HomeViewModel(
     val uiState:StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     fun loadPopular() = viewModelScope.launch {
-        val itemList = repository.getVideos("snippet", "mostPopular", 5U, "0").items?.map{
+        val itemList = repository.getVideos("snippet", "mostPopular", 5, "0").items?.map{
             HomeItemModel(
                 title = it.snippet?.title ?: "",
                 thumbnails = it.snippet?.thumbnails?.default?.url ?: "",
@@ -37,7 +37,7 @@ class HomeViewModel(
         }
     }
     fun loadCategory(id : String) = viewModelScope.launch {
-        val categoryList = repository.getVideos("snippet", "mostPopular", 5U, id).items?.map{
+        val categoryList = repository.getVideos("snippet", "mostPopular", 5, id).items?.map{
             HomeItemModel(
                 title = it.snippet?.title ?: "",
                 thumbnails = it.snippet?.thumbnails?.default?.url ?: "",
@@ -45,11 +45,11 @@ class HomeViewModel(
                 channelID = it.snippet?.channelId ?: ""
             )
         }
-        val channeIdlList =  repository.getVideos("snippet", "mostPopular", 5U, id).items?.map{
+        val channelIdlList =  repository.getVideos("snippet", "mostPopular", 5, id).items?.map{
             it.snippet?.channelId ?: ""
         }
-        if (channeIdlList != null) {
-            loadChannel(channeIdlList)
+        if (channelIdlList != null) {
+            loadChannel(channelIdlList)
         }
         categoryList?.let { list ->
             _uiState.update { prev ->
@@ -62,7 +62,7 @@ class HomeViewModel(
     fun loadChannel(id: List<String>) = viewModelScope.launch {
         var channelList : MutableList<HomeItemModel> = mutableListOf()
         for(i in 0 .. 4){
-            repository.getChannel("snippet", 5U, id[i]).items?.forEach {
+            repository.getChannel("snippet", 5, id[i]).items?.forEach {
                 channelList.add(HomeItemModel(
                     title = it.snippet?.title ?: "",
                     thumbnails = it.snippet?.thumbnails?.default?.url ?: "",
