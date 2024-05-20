@@ -32,7 +32,6 @@ class SearchFragment : Fragment() {
     }
 
 
-    private var receivedData: SearchItem? = null
 
     private var searchKey: String = ""
 
@@ -67,12 +66,12 @@ class SearchFragment : Fragment() {
         rvSearchResult.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE && !viewModel.uiState.value.isLoading) {
                     // 사용자가 RecyclerView의 마지막을 드래그한 경우
                     viewModel.onSearch(searchKey, "next")
                 }
 
-                if (!recyclerView.canScrollVertically(-1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                if (!recyclerView.canScrollVertically(-1) && newState == RecyclerView.SCROLL_STATE_IDLE && !viewModel.uiState.value.isLoading) {
                     // 사용자가 RecyclerView의 최상단을 드래그한 경우
                     viewModel.onSearch(searchKey, "prev")
                 }

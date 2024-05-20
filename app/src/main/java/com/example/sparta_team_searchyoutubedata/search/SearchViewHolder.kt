@@ -24,10 +24,11 @@ class SearchViewModel(
         _uiState.update { prev->
             prev.copy(isLoading = true)
         }
-        var pageToken:String = ""
-        if(pageToken == "prev") pageToken = uiState.value.prevPageToken else if (pageToken == "next") pageToken = uiState.value.nextPageToken
+        var searchPageToken:String = ""
+        if(pageToken == "prev") searchPageToken = uiState.value.prevPageToken
+        else if (pageToken == "next") searchPageToken = uiState.value.nextPageToken
 
-        val searchResult = repository.getSearch(q = searchKey, order = "relevance", maxResults = 5, pageToken = pageToken)
+        val searchResult = repository.getSearch(q = searchKey, order = "relevance", maxResults = 5, pageToken = searchPageToken)
         val itemList = getListItem(searchResult)
 
         itemList?.let { list ->
