@@ -15,6 +15,7 @@ import com.example.sparta_team_searchyoutubedata.network.data.repository.Youtube
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepositoryImpl
 import com.example.sparta_team_searchyoutubedata.search.SearchFragment
 import kotlinx.coroutines.launch
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
     private val youtubeDataRepository: YoutubeDataRepository by lazy {
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        RetrofitClient.initCache(File(this.cacheDir, "httpCache"))
         initView()
     }
 
