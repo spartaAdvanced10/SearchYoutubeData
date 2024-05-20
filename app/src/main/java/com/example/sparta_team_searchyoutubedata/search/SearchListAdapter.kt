@@ -15,6 +15,7 @@ import com.example.sparta_team_searchyoutubedata.videoDetail.VideoDetailActivity
 import com.example.sparta_team_searchyoutubedata.videoDetail.VideoDetailItem
 
 class SearchListAdapter(
+    private val onItemClick: (SearchItem) -> Unit
 )
     :ListAdapter<SearchItem, SearchListAdapter.ViewHolder>(
         object: DiffUtil.ItemCallback<SearchItem>() {
@@ -36,6 +37,7 @@ class SearchListAdapter(
     inner class VideoThumbnailViewHolder(
         private val binding: ItemSearchBinding,
         private val context: Context,
+        private val onItemClick: (SearchItem) -> Unit
     ): ViewHolder(binding.root){
         override fun bind(item: SearchItem) = with(binding) {
             ivSearchImage.load(item.thumbnail)
@@ -45,6 +47,7 @@ class SearchListAdapter(
                 val intent = Intent(context, VideoDetailActivity::class.java).apply {
                     putExtra("selectItem",VideoDetailItem(item.thumbnail, item.title, item.description, false))
                 }
+                onItemClick(item)
                 context.startActivity(intent)
             }
         }
@@ -59,8 +62,7 @@ class SearchListAdapter(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            ),
-            parent.context
+            ), parent.context, onItemClick
         )
     }
 

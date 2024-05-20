@@ -48,7 +48,8 @@ class SearchViewModel(
             SearchItem(
                 thumbnail = it.snippet?.thumbnails?.default?.url ?: "",
                 title = it.snippet?.title ?: "",
-                description = it.snippet?.description ?: ""
+                description = it.snippet?.description ?: "",
+                isLiked = false
             )
         }
 
