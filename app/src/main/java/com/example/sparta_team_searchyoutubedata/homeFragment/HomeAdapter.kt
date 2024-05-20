@@ -13,7 +13,10 @@ import com.example.sparta_team_searchyoutubedata.databinding.ItemHomeBinding
 import com.example.sparta_team_searchyoutubedata.videoDetail.VideoDetailActivity
 import com.example.sparta_team_searchyoutubedata.videoDetail.VideoDetailItem
 
-class HomeAdapter:ListAdapter<HomeItemModel, HomeAdapter.ViewHolder>(
+class HomeAdapter(
+    // item click 이벤트 처리
+    private val onItemClick: (HomeItemModel) -> Unit
+):ListAdapter<HomeItemModel, HomeAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<HomeItemModel>(){
         override fun areItemsTheSame(oldItem: HomeItemModel, newItem: HomeItemModel): Boolean {
             return oldItem == newItem
@@ -29,7 +32,9 @@ class HomeAdapter:ListAdapter<HomeItemModel, HomeAdapter.ViewHolder>(
     }
     class VideoViewHolder(
         private val binding: ItemHomeBinding,
-        private val context: Context
+        private val context: Context,
+        // item click 이벤트 처리
+        private val onItemClick: (HomeItemModel) -> Unit
     ) : ViewHolder(binding.root){
         override fun bind(item: HomeItemModel) = with(binding){
             ivThumbnails.load(item.thumbnails)
@@ -41,6 +46,8 @@ class HomeAdapter:ListAdapter<HomeItemModel, HomeAdapter.ViewHolder>(
                         VideoDetailItem(item.thumbnails, item.title, item.description, false)
                     )
                 }
+                // item click 이벤트 처리
+                onItemClick(item)
                 context.startActivity(intent)
             }
         }
@@ -49,7 +56,7 @@ class HomeAdapter:ListAdapter<HomeItemModel, HomeAdapter.ViewHolder>(
         return VideoViewHolder(
             ItemHomeBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            ), parent.context
+            ), parent.context, onItemClick
         )
     }
 
