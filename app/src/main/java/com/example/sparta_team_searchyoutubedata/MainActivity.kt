@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.tbMain)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        setFragment(HomeFragment())
         botNaviMain.itemIconTintList = null
         botNaviMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -58,6 +57,8 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        botNaviMain.selectedItemId = R.id.botNavi_menu_home
     }
 
     private fun setBotNaviIcon(onIcon: String) = with(binding) {
