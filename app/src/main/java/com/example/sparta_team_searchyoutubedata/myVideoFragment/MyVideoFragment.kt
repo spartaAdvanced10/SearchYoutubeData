@@ -91,6 +91,7 @@ class MyVideoFragment : Fragment() {
             onDeleteItemClick = { video ->
                 mainViewModel.deleteMyVideo(video)
 
+                //북마크 해제 메시지 추가
                Toast.makeText(context, "북마크가 해제되었습니다", Toast.LENGTH_SHORT).show()
             }
         )

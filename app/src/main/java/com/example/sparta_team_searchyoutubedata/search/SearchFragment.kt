@@ -67,10 +67,12 @@ class SearchFragment : Fragment() {
 
     private fun initView() = with(binding){
         ivSearch.setOnClickListener {
+
             // 키보드를 숨기기
             val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
 
+            //검색어 입력안했을 때 메시지 띄우기
             val query = binding.etSearch.text.toString()
             if (query.isNotEmpty()) {
                 searchKey = etSearch.text.toString()
