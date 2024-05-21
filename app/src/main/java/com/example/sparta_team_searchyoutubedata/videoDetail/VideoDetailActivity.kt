@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
@@ -55,6 +56,13 @@ class VideoDetailActivity : AppCompatActivity() {
 
         ivIcGood.setOnClickListener {
             viewModel.onLiked()
+            //토스트메시지 추가
+            val message = if (viewModel.uiState.value?.isLiked == true) {
+                "북마크가 해제되었습니다"
+            } else {
+                "북마크가 추가되었습니다"
+            }
+            Toast.makeText(this@VideoDetailActivity, message, Toast.LENGTH_SHORT).show()
         }
     }
 
