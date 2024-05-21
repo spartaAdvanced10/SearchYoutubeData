@@ -36,7 +36,7 @@ class HomeFragment:Fragment() {
         }
     }
     private val viewModel:HomeViewModel by viewModels{
-        HomeViewModelFactory(requireContext())
+        HomeViewModelFactory(requireContext()   )
     }
 
     override fun onCreateView(
