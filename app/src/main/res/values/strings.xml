@@ -1,6 +1,16 @@
 <resources>
-    <string name="app_name">sparta_team_searchYoutubeData</string>
+    <string name="app_name">Bookmark</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_fragment_hint">검색어를 입력해주세요.</string>
+    <string name="user_name">홍길동</string>
+    <string name="user_email">honghong12@bookmark.com</string>
+    <string name="gaming">Gaming</string>
+    <string name="most_video">Most Popular Video</string>
+    <string name="channel_category">Channels By Category</string>
+    <string name="record">기록</string>
+    <string name="my_video">My Video</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="mine">Mine</string>
 </resources>

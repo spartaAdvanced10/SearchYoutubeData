@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sparta_team_searchyoutubedata.databinding.ItemMyVideosBinding
 import com.example.sparta_team_searchyoutubedata.room.entity.MyVideoListEntity
-import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

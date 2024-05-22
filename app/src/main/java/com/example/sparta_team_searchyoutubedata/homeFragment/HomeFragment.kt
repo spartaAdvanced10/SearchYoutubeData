@@ -30,13 +30,15 @@ class HomeFragment:Fragment() {
             onItemClick(item)
         }
     }
+
+
     private val channelAdapter:HomeAdapter by lazy {
         HomeAdapter{item ->
             onItemClick(item)
         }
     }
     private val viewModel:HomeViewModel by viewModels{
-        HomeViewModelFactory(requireContext())
+        HomeViewModelFactory(requireContext()   )
     }
 
     override fun onCreateView(
@@ -49,6 +51,8 @@ class HomeFragment:Fragment() {
         initView()
         initViewModel()
         initSpinner()
+
+
 
         return binding.root
     }

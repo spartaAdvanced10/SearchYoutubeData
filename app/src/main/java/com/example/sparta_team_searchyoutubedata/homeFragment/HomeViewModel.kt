@@ -18,14 +18,14 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val repository:YoutubeDataRepository,
+    private val repository: YoutubeDataRepository,
     private val watchedRepository: WatchedListDao
-) : ViewModel(){
+) : ViewModel() {
     private val _uiState = MutableStateFlow(HomeUiState.init())
-    val uiState:StateFlow<HomeUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     fun loadPopular() = viewModelScope.launch {
-        val itemList = repository.getVideos("snippet", "mostPopular", 5, "0").items?.map{
+        val itemList = repository.getVideos("snippet", "mostPopular", 10, "0").items?.map {
             HomeItemModel(
                 title = it.snippet?.title ?: "",
                 thumbnails = it.snippet?.thumbnails?.default?.url ?: "",
@@ -42,8 +42,11 @@ class HomeViewModel(
             }
         }
     }
-    fun loadCategory(id : String) = viewModelScope.launch {
-        val categoryList = repository.getVideos("snippet", "mostPopular", 5, id).items?.map{
+
+
+
+    fun loadCategory(id: String) = viewModelScope.launch {
+        val categoryList = repository.getVideos("snippet", "mostPopular", 5, id).items?.map {
             HomeItemModel(
                 title = it.snippet?.title ?: "",
                 thumbnails = it.snippet?.thumbnails?.default?.url ?: "",
@@ -52,7 +55,7 @@ class HomeViewModel(
                 isLiked = false
             )
         }
-        val channelIdlList =  repository.getVideos("snippet", "mostPopular", 5, id).items?.map{
+        val channelIdlList = repository.getVideos("snippet", "mostPopular", 5, id).items?.map {
             it.snippet?.channelId ?: ""
         }
         if (channelIdlList != null) {
@@ -66,20 +69,24 @@ class HomeViewModel(
             }
         }
     }
+
     fun loadChannel(id: List<String>) = viewModelScope.launch {
-        var channelList : MutableList<HomeItemModel> = mutableListOf()
-        for(i in 0 .. 4){
-            repository.getChannel("snippet", 5, id[i]).items?.forEach {
-                channelList.add(HomeItemModel(
+        Log.d("it_id", "$id")
+        var channelList: MutableList<HomeItemModel> = mutableListOf()
+        repository.getChannel("snippet", 5, id.joinToString(" , ")).items?.forEach {
+            Log.d("it_id", "$id")
+            channelList.add(
+                HomeItemModel(
                     title = it.snippet?.title ?: "",
                     thumbnails = it.snippet?.thumbnails?.default?.url ?: "",
                     description = it.snippet?.description ?: "",
-                    channelID = id[i],
+                    channelID = it.id ?: "",
                     isLiked = false
-                ))
-            }
-
+                )
+            )
+           Log.d("it_id3", "$it.id")
         }
+
         channelList = channelList.toMutableSet().toMutableList()
         channelList?.let { list ->
             _uiState.update { prev ->
@@ -89,17 +96,19 @@ class HomeViewModel(
             }
         }
     }
-    fun saveWatchedVideo(watchedVideo: WatchedListEntity){
+
+    fun saveWatchedVideo(watchedVideo: WatchedListEntity) {
         viewModelScope.launch {
             watchedRepository.insertVideo(watchedVideo)
         }
     }
 }
-class HomeViewModelFactory(context: Context) : ViewModelProvider.Factory{
+
+class HomeViewModelFactory(context: Context) : ViewModelProvider.Factory {
     private val repository = YoutubeDataRepositoryImpl(RetrofitClient.youtubeDataRemote)
-    private val watchedRepository= WatchedListDatabase.getDataBase(context).watchedListDao()
+    private val watchedRepository = WatchedListDatabase.getDataBase(context).watchedListDao()
 
     override fun <T : ViewModel> create(
         modelClass: Class<T>
-    ) : T = HomeViewModel(repository, watchedRepository) as T
+    ): T = HomeViewModel(repository, watchedRepository) as T
 }
