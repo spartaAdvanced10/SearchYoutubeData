@@ -25,8 +25,7 @@ class HomeViewModel(
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     fun loadPopular() = viewModelScope.launch {
-        val response = repository.getVideos("snippet", "mostPopular", 10, "0")
-        val itemList = response.items?.map {
+        val itemList = repository.getVideos("snippet", "mostPopular", 10, "0").items?.map {
             HomeItemModel(
                 title = it.snippet?.title ?: "",
                 thumbnails = it.snippet?.thumbnails?.default?.url ?: "",
@@ -72,10 +71,7 @@ class HomeViewModel(
     }
 
     fun loadChannel(id: List<String>) = viewModelScope.launch {
-//        val url = "https://www.googleapis.com/youtube/v3channels?part=snippet&maxResults=5&ids=${id.joinToString(",")}"
         Log.d("it_id", "$id")
-//        val response = repository.getChannel("snippet", 5, id.joinToString (","))
-//        saveETag(url, response.etag)
         var channelList: MutableList<HomeItemModel> = mutableListOf()
         repository.getChannel("snippet", 5, id.joinToString(" , ")).items?.forEach {
             Log.d("it_id", "$id")
@@ -106,15 +102,6 @@ class HomeViewModel(
             watchedRepository.insertVideo(watchedVideo)
         }
     }
-
-//    private fun saveETag(url: String, eTag:String?){
-//        viewModelScope.launch(Dispatchers.IO) {
-//            eTag?.let {
-//                val eTagEntity = ETagEntity(url = url, eTag = it)
-//                eTagRepository.insertOrUpdateETag(eTagEntity)
-//            }
-//        }
-//    }
 }
 
 class HomeViewModelFactory(context: Context) : ViewModelProvider.Factory {
