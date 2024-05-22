@@ -30,6 +30,8 @@ class HomeFragment:Fragment() {
             onItemClick(item)
         }
     }
+
+
     private val channelAdapter:HomeAdapter by lazy {
         HomeAdapter{item ->
             onItemClick(item)
@@ -49,6 +51,8 @@ class HomeFragment:Fragment() {
         initView()
         initViewModel()
         initSpinner()
+
+
 
         return binding.root
     }

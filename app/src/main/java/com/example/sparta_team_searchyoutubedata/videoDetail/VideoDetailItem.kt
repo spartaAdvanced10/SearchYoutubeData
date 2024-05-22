@@ -6,5 +6,5 @@ data class VideoDetailItem(
     val thumbnail: String,
     val title: String,
     val description: String,
-    var isLiked: Boolean
+    val isLiked: Boolean
 ) : Serializable

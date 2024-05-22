@@ -35,16 +35,16 @@ class SearchFragment : Fragment() {
     private val binding: FragmentSearchBinding get() = _binding!!
 
     private val listAdapter: SearchListAdapter by lazy {
-        SearchListAdapter{item ->
-            onItemClick(item)}
+        SearchListAdapter { item ->
+            onItemClick(item)
+        }
     }
 
-    private val viewModel: SearchViewModel by viewModels{
+    private val viewModel: SearchViewModel by viewModels {
         SearchViewModelFactory()
     }
 
     private lateinit var mainViewModel: MainViewModel
-
 
 
     private var searchKey: String = ""
@@ -65,11 +65,12 @@ class SearchFragment : Fragment() {
         initViewModel()
     }
 
-    private fun initView() = with(binding){
+    private fun initView() = with(binding) {
         ivSearch.setOnClickListener {
 
             // 키보드를 숨기기
-            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm =
+                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
 
             //검색어 입력안했을 때 메시지 띄우기
@@ -81,11 +82,6 @@ class SearchFragment : Fragment() {
                 Toast.makeText(context, "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
             }
         }
-
-
-
-
-
 
         rvSearchResult.adapter = listAdapter
         rvSearchResult.layoutManager = LinearLayoutManager(requireContext())
@@ -109,7 +105,7 @@ class SearchFragment : Fragment() {
         })
     }
 
-    private fun initViewModel(){
+    private fun initViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.flowWithLifecycle(lifecycle)
                 .collectLatest { state ->
@@ -118,7 +114,7 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun onBind(state: SearchUiState){
+    private fun onBind(state: SearchUiState) {
         listAdapter.submitList(state.list)
         binding.progress.isVisible = state.isLoading
     }

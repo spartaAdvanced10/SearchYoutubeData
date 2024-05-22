@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="22dp"
-            android:text="임채명"
+            android:text="@string/user_name"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/tv_user_info"
@@ -42,7 +42,7 @@
             android:id="@+id/tv_user_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="saver203@naver.com"
+            android:text="@string/user_email"
             app:layout_constraintBottom_toBottomOf="@id/iv_profile_img"
             app:layout_constraintStart_toStartOf="@id/tv_user_name"
             app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
@@ -69,11 +69,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="30dp"
-                android:text="   기록"
+                android:background="@color/Deep_pine"
+                android:paddingStart="20dp"
+                android:text="@string/record"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
-                android:background="@color/Deep_pine"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -109,13 +110,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="20dp"
-                android:text="   My Video"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@color/white"
                 android:background="@color/Deep_pine"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                android:paddingStart="20dp"
+                android:text="@string/my_video"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <FrameLayout
                 android:id="@+id/fl_myVideo"
