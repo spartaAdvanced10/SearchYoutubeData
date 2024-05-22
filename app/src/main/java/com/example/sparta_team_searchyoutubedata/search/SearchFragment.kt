@@ -101,10 +101,10 @@ class SearchFragment : Fragment() {
                     viewModel.onSearch(searchKey, "next")
                 }
 
-                if (!recyclerView.canScrollVertically(-1) && newState == RecyclerView.SCROLL_STATE_IDLE && !viewModel.uiState.value.isLoading) {
-                    // 사용자가 RecyclerView의 최상단을 드래그한 경우
-                    viewModel.onSearch(searchKey, "prev")
-                }
+//                if (!recyclerView.canScrollVertically(-1) && newState == RecyclerView.SCROLL_STATE_IDLE && !viewModel.uiState.value.isLoading) {
+//                    // 사용자가 RecyclerView의 최상단을 드래그한 경우
+//                    viewModel.onSearch(searchKey, "prev")
+//                }
             }
         })
     }
