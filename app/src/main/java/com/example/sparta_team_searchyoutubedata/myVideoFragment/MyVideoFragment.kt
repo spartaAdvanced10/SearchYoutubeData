@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +47,7 @@ class MyVideoFragment : Fragment() {
         _binding = FragmentMyVideoBinding.inflate(inflater, container, false)
 
         Glide.with(binding.root)
-            .load(R.drawable.ic_launcher_background)
+            .load(R.drawable.profile)
             .circleCrop()
             .into(binding.ivProfileImg)
 
@@ -89,6 +90,9 @@ class MyVideoFragment : Fragment() {
             },
             onDeleteItemClick = { video ->
                 mainViewModel.deleteMyVideo(video)
+
+                //북마크 해제 메시지 추가
+               Toast.makeText(context, "북마크가 해제되었습니다", Toast.LENGTH_SHORT).show()
             }
         )
 

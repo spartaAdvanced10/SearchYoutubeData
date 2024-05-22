@@ -1,11 +1,14 @@
 package com.example.sparta_team_searchyoutubedata.search
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -64,9 +67,25 @@ class SearchFragment : Fragment() {
 
     private fun initView() = with(binding){
         ivSearch.setOnClickListener {
-            searchKey = etSearch.text.toString()
-            viewModel.onSearch(searchKey, "")
+
+            // 키보드를 숨기기
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
+
+            //검색어 입력안했을 때 메시지 띄우기
+            val query = binding.etSearch.text.toString()
+            if (query.isNotEmpty()) {
+                searchKey = etSearch.text.toString()
+                viewModel.onSearch(searchKey, "")
+            } else {
+                Toast.makeText(context, "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
+
+
+
+
+
 
         rvSearchResult.adapter = listAdapter
         rvSearchResult.layoutManager = LinearLayoutManager(requireContext())
@@ -82,10 +101,10 @@ class SearchFragment : Fragment() {
                     viewModel.onSearch(searchKey, "next")
                 }
 
-                if (!recyclerView.canScrollVertically(-1) && newState == RecyclerView.SCROLL_STATE_IDLE && !viewModel.uiState.value.isLoading) {
-                    // 사용자가 RecyclerView의 최상단을 드래그한 경우
-                    viewModel.onSearch(searchKey, "prev")
-                }
+//                if (!recyclerView.canScrollVertically(-1) && newState == RecyclerView.SCROLL_STATE_IDLE && !viewModel.uiState.value.isLoading) {
+//                    // 사용자가 RecyclerView의 최상단을 드래그한 경우
+//                    viewModel.onSearch(searchKey, "prev")
+//                }
             }
         })
     }

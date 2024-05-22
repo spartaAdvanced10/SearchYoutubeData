@@ -24,7 +24,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_launcher_background" />
+            tools:src="@drawable/profile" />
 
         <TextView
             android:id="@+id/tv_user_name"
@@ -66,13 +66,14 @@
 
             <TextView
                 android:id="@+id/tv_record"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginStart="15dp"
-                android:text="기록"
+                android:text="   기록"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@color/Deep_pine"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -105,12 +106,14 @@
 
             <TextView
                 android:id="@+id/tv_my_video"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Video"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="   My Video"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:layout_margin="15dp"
+                android:textColor="@color/white"
+                android:background="@color/Deep_pine"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 

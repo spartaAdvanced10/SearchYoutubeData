@@ -34,7 +34,7 @@ class SearchViewModel(
         itemList?.let { list ->
             _uiState.update { prev ->
                 prev.copy(
-                    list = list,
+                    list = prev.list + list,
                     isLoading = false,
                     nextPageToken = searchResult.nextPageToken ?: "",
                     prevPageToken = searchResult.prevPageToken ?: ""
