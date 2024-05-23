@@ -6,23 +6,20 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitClient{
-    private val baseUrl = "https://www.googleapis.com/youtube/v3/"
 
+object RetrofitClient {
+    private val baseUrl = "https://www.googleapis.com/youtube/v3/"
 
     val interceptor = HttpLoggingInterceptor().apply {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
 
-
-    private val okHttpClient : OkHttpClient by lazy{
+    private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .addInterceptor(interceptor)
             .addInterceptor(AuthorizationInterceptor())
             .build()
     }
-
-
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()

@@ -4,16 +4,16 @@
     <item
         android:id="@+id/botNavi_menu_search"
         android:icon="@drawable/selector_botnavi_search"
-        android:title="Search"
+        android:title="@string/search"
         android:background="@android:color/transparent"/>
     <item
         android:id="@+id/botNavi_menu_home"
-        android:title="Home"
+        android:title="@string/home"
         android:icon="@drawable/selector_botnavi_home"
         android:background="@android:color/transparent"/>
     <item
         android:id="@+id/botNavi_menu_mine"
-        android:title="Mine"
+        android:title="@string/mine"
         android:icon="@drawable/selector_botnavi_mine"
         android:background="@android:color/transparent"/>
 </menu>

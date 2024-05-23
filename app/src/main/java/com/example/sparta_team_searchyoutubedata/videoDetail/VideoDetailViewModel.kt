@@ -46,7 +46,6 @@ class VideoDetailViewModel(
                 repository.deleteVideo(videoDetailItem.thumbnail)
                 _uiState.update { it.copy(isLiked = false) }
             }
-            videoDetailItem.isLiked = _uiState.value.isLiked
 
             val videos = repository.getAllVideos().value
             Log.d("MyVideoList", "$videos, ${_uiState.value.isLiked}")
