@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.sparta_team_searchyoutubedata.R
 import com.example.sparta_team_searchyoutubedata.databinding.FragmentMyVideoBinding
+import com.example.sparta_team_searchyoutubedata.room.database.MyDatabase
 import com.example.sparta_team_searchyoutubedata.room.database.MyVideoListDatabase
 import com.example.sparta_team_searchyoutubedata.room.database.WatchedListDatabase
+import com.example.sparta_team_searchyoutubedata.room.repository.MyRoomRepository
 import com.example.sparta_team_searchyoutubedata.room.repository.MyVideoListRepository
 import com.example.sparta_team_searchyoutubedata.room.repository.WatchedListRepository
 import com.example.sparta_team_searchyoutubedata.ui.adapter.MyVideoListAdapter
@@ -23,21 +25,14 @@ import com.example.sparta_team_searchyoutubedata.videoDetail.VideoDetailActivity
 import com.example.sparta_team_searchyoutubedata.videoDetail.VideoDetailItem
 
 class MyVideoFragment : Fragment() {
-    private lateinit var myVideoRepository: MyVideoListRepository
-    private lateinit var watchedListRepository: WatchedListRepository
 
     private val mainViewModel: MainViewModel by viewModels {
-        MainViewModelFactory(myVideoRepository, watchedListRepository)
+        MainViewModelFactory(MyRoomRepository(MyDatabase.getMyDatabase(requireContext()).myDao()))
     }
 
     private var _binding: FragmentMyVideoBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        initRepository()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,7 +87,7 @@ class MyVideoFragment : Fragment() {
                 mainViewModel.deleteMyVideo(video)
 
                 //북마크 해제 메시지 추가
-               Toast.makeText(context, "북마크가 해제되었습니다", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "북마크가 해제되었습니다", Toast.LENGTH_SHORT).show()
             }
         )
 
@@ -113,10 +108,4 @@ class MyVideoFragment : Fragment() {
         }
     }
 
-    private fun initRepository() {
-        val videoDao = MyVideoListDatabase.getMyVideoDatabase(requireContext()).myVideoListDao()
-        val watchedDao = WatchedListDatabase.getDataBase(requireContext()).watchedListDao()
-        myVideoRepository = MyVideoListRepository(videoDao)
-        watchedListRepository = WatchedListRepository(watchedDao)
-    }
 }

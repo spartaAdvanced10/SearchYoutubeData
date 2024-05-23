@@ -21,9 +21,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sparta_team_searchyoutubedata.databinding.FragmentSearchBinding
 import com.example.sparta_team_searchyoutubedata.myVideoFragment.MainViewModel
 import com.example.sparta_team_searchyoutubedata.myVideoFragment.MainViewModelFactory
+import com.example.sparta_team_searchyoutubedata.room.database.MyDatabase
 import com.example.sparta_team_searchyoutubedata.room.database.MyVideoListDatabase
 import com.example.sparta_team_searchyoutubedata.room.database.WatchedListDatabase
 import com.example.sparta_team_searchyoutubedata.room.entity.WatchedListEntity
+import com.example.sparta_team_searchyoutubedata.room.repository.MyRoomRepository
 import com.example.sparta_team_searchyoutubedata.room.repository.MyVideoListRepository
 import com.example.sparta_team_searchyoutubedata.room.repository.WatchedListRepository
 import com.example.sparta_team_searchyoutubedata.videoDetail.VideoDetailItem
@@ -132,15 +134,11 @@ class SearchFragment : Fragment() {
     }
 
     private fun initRepository() {
-        val myVideoDatabase = MyVideoListDatabase.getMyVideoDatabase(requireContext())
-        val watchedDatabase = WatchedListDatabase.getDataBase(requireContext())
-
-        val myVideoRepository = MyVideoListRepository(myVideoDatabase.myVideoListDao())
-        val watchedListRepository = WatchedListRepository(watchedDatabase.watchedListDao())
-
+        val myDatabase = MyDatabase.getMyDatabase(requireContext())
+        val myRoomRepository = MyRoomRepository(myDatabase.myDao())
         mainViewModel = ViewModelProvider(
             this,
-            MainViewModelFactory(myVideoRepository, watchedListRepository)
+            MainViewModelFactory(myRoomRepository)
         )[MainViewModel::class.java]
     }
 }

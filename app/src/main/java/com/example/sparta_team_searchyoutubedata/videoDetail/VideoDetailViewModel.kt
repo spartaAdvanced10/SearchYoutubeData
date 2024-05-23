@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.sparta_team_searchyoutubedata.room.entity.MyVideoListEntity
+import com.example.sparta_team_searchyoutubedata.room.repository.MyRoomRepository
 import com.example.sparta_team_searchyoutubedata.room.repository.MyVideoListRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class VideoDetailViewModel(
     private val videoDetailItem: VideoDetailItem,
-    private val repository: MyVideoListRepository
+    private val repository: MyRoomRepository
 ): ViewModel() {
     private val _uiState = MutableStateFlow(videoDetailItem)
     val uiState: StateFlow<VideoDetailItem> = _uiState.asStateFlow()
@@ -47,7 +48,7 @@ class VideoDetailViewModel(
                 _uiState.update { it.copy(isLiked = false) }
             }
 
-            val videos = repository.getAllVideos().value
+            val videos = repository.getAllVideosWithMyList().value
             Log.d("MyVideoList", "$videos, ${_uiState.value.isLiked}")
         }
     }
@@ -55,7 +56,7 @@ class VideoDetailViewModel(
 
 class VideoDetailViewModelFactory(
     private val videoDetailItem: VideoDetailItem,
-    private val repository: MyVideoListRepository
+    private val repository: MyRoomRepository
 ): ViewModelProvider.Factory{
     override fun <T : ViewModel> create(
         modelClass: Class<T>

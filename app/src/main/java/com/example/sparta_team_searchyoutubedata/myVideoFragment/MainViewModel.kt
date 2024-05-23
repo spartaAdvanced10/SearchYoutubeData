@@ -6,37 +6,36 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.sparta_team_searchyoutubedata.room.entity.MyVideoListEntity
 import com.example.sparta_team_searchyoutubedata.room.entity.WatchedListEntity
+import com.example.sparta_team_searchyoutubedata.room.repository.MyRoomRepository
 import com.example.sparta_team_searchyoutubedata.room.repository.MyVideoListRepository
 import com.example.sparta_team_searchyoutubedata.room.repository.WatchedListRepository
 import kotlinx.coroutines.launch
 
 
 class MainViewModel(
-    private val myVideoRepository: MyVideoListRepository,
-    private val watchedListRepository: WatchedListRepository
+    private val myRoomRepository: MyRoomRepository
 ) : ViewModel() {
 
-    val watchedVideosLiveData = watchedListRepository.getAllVideos()
-    val myVideoListData = myVideoRepository.getAllVideos()
+    val watchedVideosLiveData = myRoomRepository.getAllVideosWithWatchedList()
+    val myVideoListData = myRoomRepository.getAllVideosWithMyList()
 
 
     fun insertWatchedVideo(watchedVideo: WatchedListEntity) {
         viewModelScope.launch {
-            watchedListRepository.insert(watchedVideo)
+            myRoomRepository.insert(watchedVideo)
         }
     }
 
     fun deleteMyVideo(myVideo: MyVideoListEntity) {
         viewModelScope.launch {
-            myVideoRepository.deleteVideo(myVideo.id)
+            myRoomRepository.deleteVideo(myVideo.id)
         }
     }
 
 }
 
 class MainViewModelFactory(
-    private val myVideoRepository: MyVideoListRepository,
-    private val watchedListRepository: WatchedListRepository
+    private val myRoomRepository: MyRoomRepository
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(
@@ -45,8 +44,7 @@ class MainViewModelFactory(
     ): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             return MainViewModel(
-                myVideoRepository = myVideoRepository,
-                watchedListRepository = watchedListRepository,
+                myRoomRepository = myRoomRepository
             ) as T
         } else {
             throw IllegalArgumentException("Unknown ViewModel class")
