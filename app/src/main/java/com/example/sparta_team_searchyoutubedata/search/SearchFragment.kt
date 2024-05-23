@@ -29,9 +29,12 @@ import com.example.sparta_team_searchyoutubedata.room.repository.MyRoomRepositor
 import com.example.sparta_team_searchyoutubedata.room.repository.MyVideoListRepository
 import com.example.sparta_team_searchyoutubedata.room.repository.WatchedListRepository
 import com.example.sparta_team_searchyoutubedata.videoDetail.VideoDetailItem
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding: FragmentSearchBinding get() = _binding!!
@@ -42,9 +45,7 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private val viewModel: SearchViewModel by viewModels {
-        SearchViewModelFactory()
-    }
+    private val viewModel: SearchViewModel by viewModels()
 
     private lateinit var mainViewModel: MainViewModel
 

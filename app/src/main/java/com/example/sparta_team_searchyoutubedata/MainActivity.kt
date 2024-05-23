@@ -10,7 +10,9 @@ import com.example.sparta_team_searchyoutubedata.network.client.RetrofitClient
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepository
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepositoryImpl
 import com.example.sparta_team_searchyoutubedata.search.SearchFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val youtubeDataRepository: YoutubeDataRepository by lazy {
         YoutubeDataRepositoryImpl(RetrofitClient.youtubeDataRemote)

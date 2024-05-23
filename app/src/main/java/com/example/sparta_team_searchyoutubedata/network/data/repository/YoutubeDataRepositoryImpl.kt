@@ -6,8 +6,9 @@ import com.example.sparta_team_searchyoutubedata.network.data.model.entity.Video
 import com.example.sparta_team_searchyoutubedata.network.data.model.entity.VideoYoutubeDataEntity
 import com.example.sparta_team_searchyoutubedata.network.data.model.mapper.toEntity
 import com.example.sparta_team_searchyoutubedata.network.data.remote.YoutubeDataRemoteResource
+import javax.inject.Inject
 
-class YoutubeDataRepositoryImpl(
+class YoutubeDataRepositoryImpl @Inject constructor(
     private val remoteResource: YoutubeDataRemoteResource
 ): YoutubeDataRepository {
     override suspend fun getSearch(

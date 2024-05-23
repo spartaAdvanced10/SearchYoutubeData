@@ -7,14 +7,18 @@ import com.example.sparta_team_searchyoutubedata.network.client.RetrofitClient
 import com.example.sparta_team_searchyoutubedata.network.data.model.entity.SearchYoutubeDataEntity
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepository
 import com.example.sparta_team_searchyoutubedata.network.data.repository.YoutubeDataRepositoryImpl
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(
+@HiltViewModel
+class SearchViewModel @Inject constructor(
     private val repository: YoutubeDataRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SearchUiState.init())
@@ -57,11 +61,11 @@ class SearchViewModel(
     }
 }
 
-class SearchViewModelFactory : ViewModelProvider.Factory {
-    private val repository = YoutubeDataRepositoryImpl(RetrofitClient.youtubeDataRemote)
-
-    override fun <T : ViewModel> create(
-        modelClass: Class<T>
-    ): T = SearchViewModel(repository) as T
-}
+//class SearchViewModelFactory : ViewModelProvider.Factory {
+//    private val repository = YoutubeDataRepositoryImpl(RetrofitClient.youtubeDataRemote)
+//
+//    override fun <T : ViewModel> create(
+//        modelClass: Class<T>
+//    ): T = SearchViewModel(repository) as T
+//}
 
